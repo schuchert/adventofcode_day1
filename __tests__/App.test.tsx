@@ -26,4 +26,8 @@ describe('basic advent project screen layout', () => {
   it('has a go button', () => {
     theApp.getByLabelText('go');
   });
+
+  it('has a clear button', () => {
+    theApp.getByLabelText('clear');
+  });
 });
