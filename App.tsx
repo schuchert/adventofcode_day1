@@ -1,14 +1,15 @@
-import React from 'react';
-import {Button, Text, TextInput, View} from 'react-native';
+import React from "react";
+import { Button, Text, TextInput, View } from "react-native";
+import { maxElf, transform } from "./Transform";
 
 export function App(): JSX.Element {
-  const [text, onChangeText] = React.useState('Enter your test data here');
-  const [titleText, setTitleText] = React.useState('');
+  const [text, onChangeText] = React.useState("Enter your test data here");
+  const [titleText, setTitleText] = React.useState("");
 
   return (
-    <View style={{flex: 1, flexDirection: 'row'}}>
+    <View style={{ flex: 1, flexDirection: "row" }}>
       <TextInput
-        textAlignVertical={'top'}
+        textAlignVertical={"top"}
         multiline={true}
         style={{
           fontSize: 40,
@@ -16,7 +17,7 @@ export function App(): JSX.Element {
           borderWidth: 3,
           padding: 5,
         }}
-        accessibilityLabel={'input'}
+        accessibilityLabel={"input"}
         onChangeText={onChangeText}
         value={text}
       />
@@ -25,28 +26,31 @@ export function App(): JSX.Element {
           flex: 1,
           borderWidth: 3,
           padding: 3,
-          justifyContent: 'center',
+          justifyContent: "center",
           gap: 10,
-        }}>
+        }}
+      >
         <Button
-          accessibilityLabel={'clear'}
-          title={'Clear'}
+          accessibilityLabel={"clear"}
+          title={"Clear"}
           onPress={() => {
-            onChangeText('');
-            setTitleText('');
+            onChangeText("");
+            setTitleText("");
           }}
         />
         <Button
-          accessibilityLabel={'go'}
-          title={'Go'}
+          accessibilityLabel={"go"}
+          title={"Go"}
           onPress={() => {
-            setTitleText(text);
+            const result = maxElf(transform(text));
+            setTitleText(JSON.stringify(result, undefined, 2));
           }}
         />
       </View>
       <Text
-        style={{flex: 10, borderWidth: 3, padding: 5, fontSize: 40}}
-        accessibilityLabel={'output'}>
+        style={{ flex: 10, borderWidth: 3, padding: 5, fontSize: 40 }}
+        accessibilityLabel={"output"}
+      >
         {titleText}
       </Text>
     </View>
